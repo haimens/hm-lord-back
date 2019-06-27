@@ -19,7 +19,7 @@ router.use(
         token_type_zero: [],
         token_type_one: [],
         token_type_two: [],
-        token_type_three: []
+        token_type_three: ['quote']
     })
 );
 
@@ -42,6 +42,10 @@ router.use("/signup", signupRoute);
 router.use("/logout", logoutRoute);
 router.use("/forget", forgetRoute);
 
+
+const quoteRoute = require('./quote.route');
+
+router.use('/quote', quoteRoute);
 // App routes
 
 router.use('/', async (req, res, next) => {
