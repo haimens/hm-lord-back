@@ -10,7 +10,7 @@ router.post('/', async (req, res, next) => {
 
         const resBody = func.configSuccess(
             await VNQuoteAction.registerQuoteRecordWithAddress(req.params, req.body, req.query, req.lord.verify_info),
-            'QUOTE SUCCESS'
+            'QUOTE SUCCESS', req.lord.user_info
         );
         res.json(resBody);
     } catch (e) {
