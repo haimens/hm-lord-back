@@ -57,7 +57,7 @@ router.patch('/detail/:customer_token', async (req, res, next) => {
 
 router.patch('/info/:customer_token', async (req, res, next) => {
     try {
-        
+
         const resBody = func.configSuccess(
             await VNCustomerAction.modifyCustomerInfo(
                 req.params, req.body, req.query, req.lord.verify_info
@@ -66,6 +66,17 @@ router.patch('/info/:customer_token', async (req, res, next) => {
 
         res.json(resBody);
 
+    } catch (e) {
+        next(e);
+    }
+});
+
+
+router.get('/detail/:realm_token/:customer_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+
+        )
     } catch (e) {
         next(e);
     }

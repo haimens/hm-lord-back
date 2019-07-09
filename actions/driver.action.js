@@ -114,6 +114,23 @@ class VNDriverAction extends VNAction {
         }
     }
 
+    static async findDriverDetail(params, body, query, auth) {
+        try {
+
+            const {driver_token} = params;
+            if (!driver_token) func.throwErrorWithMissingParam('driver_token');
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['driver', 'detail', realm_token, driver_token],
+                {}, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
 
 }
 

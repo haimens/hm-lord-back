@@ -102,6 +102,25 @@ class VNCarAction extends VNAction {
         }
     }
 
+    static async findCarDetail(params, body, query, auth) {
+        try {
+
+            const {car_token} = params;
+            if (!car_token) func.throwErrorWithMissingParam('car_token');
+
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['car', 'detail', realm_token, car_token],
+                {}, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+
 }
 
 module.exports = VNCarAction;

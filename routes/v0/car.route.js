@@ -140,4 +140,19 @@ router.patch('/driver/:driver_car_token', async (req, res, next) => {
     }
 });
 
+
+router.get('/detail/:realm_token/:car_token', async (req, res, next) => {
+    try {
+
+        const resBody = func.configSuccess(
+            await VNCarAction.findCarDetail(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
 module.exports = router;

@@ -110,4 +110,19 @@ router.patch('/car/:driver_car_token', async (req, res, next) => {
         next(e);
     }
 });
+
+router.get('/detail/:driver_token', async (req, res, next) => {
+    try {
+
+        const resBody = func.configSuccess(
+            await VNDriverAction.findDriverDetail(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
 module.exports = router;
