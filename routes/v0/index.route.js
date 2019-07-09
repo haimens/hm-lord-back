@@ -45,11 +45,19 @@ router.use("/forget", forgetRoute);
 
 const quoteRoute = require('./quote.route');
 
+const driverRoute = require('./driver.route');
+const customerRoute = require('./customer.route');
+const carRoute = require('./car.route');
+
+
 router.use('/quote', quoteRoute);
+router.use('/driver', driverRoute);
+router.use('/customer', customerRoute);
+router.use('/car', carRoute);
 // App routes
 
 router.use('/', async (req, res, next) => {
-    res.json({ status: false, message: 'KING V0 INDEX REACHED' });
+    res.json({status: false, message: 'KING V0 INDEX REACHED'});
 });
 
 module.exports = router;
