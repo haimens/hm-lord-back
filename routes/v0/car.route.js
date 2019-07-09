@@ -55,7 +55,9 @@ router.patch('/driver/:driver_car_token', async (req, res, next) => {
     try {
 
         const resBody = func.configSuccess(
-
+            await VNCarAction.modifyDriverCar(
+                req.params, req.body.req.query
+            )
         );
 
         res.json(resBody);
@@ -69,7 +71,9 @@ router.post('/driver/:car_token', async (req, res, next) => {
     try {
 
         const resBody = func.configSuccess(
-
+            await VNCarAction.registerDriverCar(
+                req.params, req.body, req.query
+            )
         );
 
         res.json(resBody);
