@@ -1,7 +1,7 @@
 const func = require('od-utility');
-const coreConn = require('../../services/core.conn');
+const coreConn = require('../services/core.conn');
 
-const VNAction = require('../action.model');
+const VNAction = require('./action.model');
 
 class VNQuoteAction extends VNAction {
 
@@ -11,7 +11,7 @@ class VNQuoteAction extends VNAction {
             const {realm_token} = this.checkRealmToken(auth);
             const record = await coreConn.coreRequest(
                 'POST',
-                ['quote', realm_token],
+                ['quote', 'detail', realm_token],
                 {}, {}, body
             );
 

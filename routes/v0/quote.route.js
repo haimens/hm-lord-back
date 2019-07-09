@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const func = require('od-utility');
 
-const VNQuoteAction = require('../../actions/quote/quote.action');
+const VNQuoteAction = require('../../actions/quote.action');
 
-router.post('/', async (req, res, next) => {
+router.post('/detail', async (req, res, next) => {
     try {
 
         const resBody = func.configSuccess(
