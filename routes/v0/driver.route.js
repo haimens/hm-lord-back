@@ -40,7 +40,7 @@ router.patch('/detail/:driver_token', async (req, res, next) => {
     try {
 
         const resBody = func.configSuccess(
-            await VNDriverAction.modifyDriverLocation(
+            await VNDriverAction.modifyDriverDetail(
                 req.params, req.body, req.query, req.lord.verify_info
             )
         );
@@ -52,4 +52,62 @@ router.patch('/detail/:driver_token', async (req, res, next) => {
 });
 
 
+router.get('/all/location/realm/:realm_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNDriverAction.findDriverLocationList(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
+
+router.post('/car/:driver_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNDriverAction.registerDriverCar(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
+router.get('/all/car/:driver_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNDriverAction.findDriverCarList(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
+
+router.patch('/car/:driver_car_token', async (req, res, next) => {
+
+    try {
+        const resBody = func.configSuccess(
+            await VNDriverAction.modifyDriverCar(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
 module.exports = router;

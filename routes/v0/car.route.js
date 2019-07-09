@@ -49,4 +49,91 @@ router.patch('/detail/:car_token', async (req, res, next) => {
     }
 });
 
+
+router.patch('/driver/:driver_car_token', async (req, res, next) => {
+
+    try {
+
+        const resBody = func.configSuccess(
+
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e)
+    }
+});
+
+router.post('/driver/:car_token', async (req, res, next) => {
+
+    try {
+
+        const resBody = func.configSuccess(
+
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e)
+    }
+});
+
+
+router.get('/all/driver/:car_token', async (req, res, next) => {
+
+    try {
+
+        const resBody = func.configSuccess(
+
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e)
+    }
+});
+
+
+router.get('/all/driver/:car_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNCarAction.findDriverCarListWithCar(
+                req.params, req.body.req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
+router.post('/driver/:car_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNCarAction.registerDriverCar(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
+router.patch('/driver/:driver_car_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNCarAction.modifyDriverCar(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
 module.exports = router;

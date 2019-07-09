@@ -47,7 +47,7 @@ class VNDriverAction extends VNAction {
         }
     }
 
-    static async modifyDriverLocation(params, body, query, auth) {
+    static async modifyDriverDetail(params, body, query, auth) {
         try {
 
             const {driver_token} = params;
@@ -63,6 +63,57 @@ class VNDriverAction extends VNAction {
             throw e;
         }
     }
+
+    static async registerDriverCar(params, body, query, auth) {
+        try {
+            const {driver_token} = params;
+            if (!driver_token) func.throwErrorWithMissingParam('driver_token');
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'POST',
+                ['driver', 'car', realm_token, driver_token],
+                {}, {}, body
+            )
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async findDriverCarList(params, body, query, auth) {
+        try {
+            const {driver_token} = params;
+            if (!driver_token) func.throwErrorWithMissingParam('driver_token');
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['driver', 'all', 'car', realm_token, driver_token],
+                query, {}, {}
+            );
+
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async modifyDriverCar(params, body, query, auth) {
+        try {
+            const {driver_car_token} = params;
+            if (!driver_car_token) func.throwErrorWithMissingParam('driver_car_token');
+            const {realm_token} = this.checkRealmToken(auth);
+
+
+            return await coreConn.coreRequest(
+                'PATCH',
+                ['driver', 'car', realm_token, driver_car_token],
+                {}, {}.body
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
 
 }
 
