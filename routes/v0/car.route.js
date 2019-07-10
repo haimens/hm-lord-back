@@ -88,7 +88,9 @@ router.get('/all/driver/:car_token', async (req, res, next) => {
     try {
 
         const resBody = func.configSuccess(
-
+            await VNCarAction.findDriverCarListWithCar(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
         );
 
         res.json(resBody);

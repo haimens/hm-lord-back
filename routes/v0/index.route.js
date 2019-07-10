@@ -50,12 +50,15 @@ const customerRoute = require('./customer.route');
 const carRoute = require('./car.route');
 const addressRoute = require('./address.route');
 
+const tripRoute = require('./trip.route');
+
 
 router.use('/quote', quoteRoute);
 router.use('/driver', driverRoute);
 router.use('/customer', customerRoute);
 router.use('/car', carRoute);
 router.use('/address', addressRoute);
+router.use('/trip', tripRoute);
 // App routes
 
 router.use('/', async (req, res, next) => {

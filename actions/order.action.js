@@ -86,11 +86,11 @@ class VNOrderAction extends VNAction {
         try {
             const {realm_token} = this.checkRealmToken(auth);
 
-            const {order_discount_token} = params;
+            const {order_token, order_discount_token} = params;
 
             return await coreConn.coreRequest(
                 'PATCH',
-                ['order', 'discount', realm_token, order_discount_token],
+                ['order', 'discount', realm_token, order_token, order_discount_token],
                 {}, {}, body
             );
         } catch (e) {

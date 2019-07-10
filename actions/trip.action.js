@@ -26,6 +26,68 @@ class VNTripAction extends VNAction {
         }
     }
 
+    static async findTripListInRealm(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['trip', 'all', 'detail', 'realm', realm_token],
+                query, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async findTripCountInRealm(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['trip', 'count', 'realm', realm_token],
+                query, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async registerTripAddon(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            const {trip_token, order_token} = params;
+
+            if (!trip_token) func.throwErrorWithMissingParam('trip_token');
+            if (!order_token) func.throwErrorWithMissingParam('order_token');
+
+            return await coreConn.coreRequest(
+                'POST',
+                ['trip', 'addon', realm_token, order_token, trip_token],
+                {}, {}, body
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async modifyTripAddon(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            const {trip_token, order_token, addon_token} = params;
+            return await coreConn.coreRequest(
+                'PATCH',
+                ['']
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+
 }
 
 module.exports = VNTripAction;

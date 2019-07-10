@@ -107,7 +107,7 @@ class VNDriverAction extends VNAction {
             return await coreConn.coreRequest(
                 'PATCH',
                 ['driver', 'car', realm_token, driver_car_token],
-                {}, {}.body
+                {}, {},body
             );
         } catch (e) {
             throw e;
