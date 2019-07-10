@@ -143,7 +143,7 @@ router.patch('/driver/:driver_car_token', async (req, res, next) => {
 });
 
 
-router.get('/detail/:realm_token/:car_token', async (req, res, next) => {
+router.get('/detail/:car_token', async (req, res, next) => {
     try {
 
         const resBody = func.configSuccess(

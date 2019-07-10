@@ -26,6 +26,25 @@ class VNTripAction extends VNAction {
         }
     }
 
+    static async findActiveTripListWithDriver(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            const {driver_token} = params;
+
+            if (!driver_token) func.throwErrorWithMissingParam('driver_token');
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['trip', 'all', 'active', 'driver', realm_token, driver_token],
+                query, {}, {}
+            );
+
+        } catch (e) {
+            throw e;
+        }
+    }
+
     static async findTripListInRealm(params, body, query, auth) {
         try {
             const {realm_token} = this.checkRealmToken(auth);
@@ -49,6 +68,24 @@ class VNTripAction extends VNAction {
                 ['trip', 'count', 'realm', realm_token],
                 query, {}, {}
             );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async findTripDetail(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            const {trip_token} = params;
+            if (!trip_token) func.throwErrorWithMissingParam('trip_token');
+            return await coreConn.coreRequest(
+                'GET',
+                ['trip', 'detail', realm_token, trip_token],
+                {}, {}, {}
+            );
+
+
         } catch (e) {
             throw e;
         }
@@ -80,8 +117,16 @@ class VNTripAction extends VNAction {
             const {trip_token, order_token, addon_token} = params;
             return await coreConn.coreRequest(
                 'PATCH',
-                ['']
+                ['trip', 'addon', realm_token, order_token, trip_token, addon_token],
+                {}, {}, body
             );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async registerTripAlerts(params, body, query, auth) {
+        try {
         } catch (e) {
             throw e;
         }
