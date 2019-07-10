@@ -52,7 +52,7 @@ router.patch('/detail/:driver_token', async (req, res, next) => {
 });
 
 
-router.get('/all/location/realm/:realm_token', async (req, res, next) => {
+router.get('/all/location/realm', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNDriverAction.findDriverLocationList(

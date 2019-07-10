@@ -71,6 +71,23 @@ class VNCustomerAction extends VNAction {
         }
     }
 
+    static async findCustomerDetail(params, body, query, auth) {
+        try {
+            const {customer_token} = params;
+            if (!customer_token) func.throwErrorWithMissingParam('customer_token');
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['customer', 'detail', realm_token, customer_token],
+                {}, {}, {}
+            );
+
+        } catch (e) {
+            throw e;
+        }
+    }
+
 }
 
 module.exports = VNCustomerAction;

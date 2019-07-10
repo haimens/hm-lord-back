@@ -19,7 +19,7 @@ router.use(
         token_type_zero: [],
         token_type_one: [],
         token_type_two: [],
-        token_type_three: ['quote', 'driver', 'customer', 'car', 'trip', 'order']
+        token_type_three: ['quote', 'driver', 'customer', 'car', 'trip', 'order', 'address']
     })
 );
 
@@ -48,12 +48,14 @@ const quoteRoute = require('./quote.route');
 const driverRoute = require('./driver.route');
 const customerRoute = require('./customer.route');
 const carRoute = require('./car.route');
+const addressRoute = require('./address.route');
 
 
 router.use('/quote', quoteRoute);
 router.use('/driver', driverRoute);
 router.use('/customer', customerRoute);
 router.use('/car', carRoute);
+router.use('/address', addressRoute);
 // App routes
 
 router.use('/', async (req, res, next) => {

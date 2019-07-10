@@ -5,6 +5,7 @@ const func = require('od-utility');
 
 router.get('/all/detail/realm', async (req, res, next) => {
     try {
+
     } catch (e) {
         next(e);
     }
