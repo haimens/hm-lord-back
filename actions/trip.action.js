@@ -59,6 +59,53 @@ class VNTripAction extends VNAction {
         }
     }
 
+    static async findActiveTripListInRealm(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['trip', 'all', 'active', 'realm', realm_token],
+                query, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+
+    static async modifyTripDetail(params, body, query, auth) {
+        try {
+
+            const {realm_token} = this.checkRealmToken(auth);
+            const {trip_token} = params;
+            return await coreConn.coreRequest(
+                'PATCH',
+                ['trip', 'detail', realm_token, trip_token],
+                {}, {}, body
+            );
+        } catch (e) {
+            throw e;
+        }
+
+    }
+
+    static async modifyTripOperation(params, body, query, auth) {
+
+        try {
+
+            const {realm_token} = this.checkRealmToken(auth);
+            const {trip_token} = params;
+            return await coreConn.coreRequest(
+                'PATCH',
+                ['trip', 'operation', realm_token, trip_token],
+                {}, {}, body
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
     static async findTripCountInRealm(params, body, query, auth) {
         try {
             const {realm_token} = this.checkRealmToken(auth);
@@ -127,6 +174,15 @@ class VNTripAction extends VNAction {
 
     static async registerTripAlerts(params, body, query, auth) {
         try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            const {trip_token,} = params;
+            return await coreConn.coreRequest(
+                'POST',
+                ['trip', 'alerts', realm_token, trip_token],
+                {}, {}, body
+            );
+
         } catch (e) {
             throw e;
         }
