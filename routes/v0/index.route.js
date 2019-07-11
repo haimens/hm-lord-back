@@ -19,7 +19,7 @@ router.use(
         token_type_zero: [],
         token_type_one: [],
         token_type_two: [],
-        token_type_three: ['quote', 'driver', 'customer', 'car', 'trip', 'order', 'address', 'alert']
+        token_type_three: ['quote', 'driver', 'customer', 'car', 'trip', 'order', 'address', 'alert', 'realm']
     })
 );
 
@@ -52,6 +52,7 @@ const addressRoute = require('./address.route');
 
 const tripRoute = require('./trip.route');
 const alertRoute = require('./alert.route');
+const realmRoute = require('./realm.route');
 
 
 router.use('/quote', quoteRoute);
@@ -61,6 +62,7 @@ router.use('/car', carRoute);
 router.use('/address', addressRoute);
 router.use('/trip', tripRoute);
 router.use('/alert', alertRoute);
+router.use('/realm', realmRoute);
 // App routes
 
 router.use('/', async (req, res, next) => {
