@@ -6,6 +6,19 @@ const func = require('od-utility');
 const VNWageAction = require('../../actions/wage.action');
 
 
+router.post('/detail/:driver_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNWageAction.registerWage(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
 router.get('/all/detail/realm', async (req, res, next) => {
     try {
 
@@ -24,7 +37,7 @@ router.get('/all/detail/realm', async (req, res, next) => {
 router.get('/sum/driver/:driver_token', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
-            await VNWageAction.findWageSum(
+            await VNWageAction.findWageSumWithDriver(
                 req.params, req.body, req.query, req.lord.verify_info
             )
         );
@@ -38,25 +51,12 @@ router.get('/all/detail/driver/:driver_token', async (req, res, next) => {
     try {
 
         const resBody = func.configSuccess(
-            await VNWageAction.findWageList(
+            await VNWageAction.findWageListWithDriver(
                 req.params, req.body, req.query, req.lord.verify_info
             )
         );
         res.json(resBody);
 
-    } catch (e) {
-        next(e);
-    }
-});
-
-router.get('/sum/driver/:driver_token', async (req, res, next) => {
-    try {
-        const resBody = func.configSuccess(
-            await VNWageAction.findWageSum(
-                req.params, req.body, req.query, req.lord.verify_info
-            )
-        );
-        res.json(resBody);
     } catch (e) {
         next(e);
     }

@@ -5,7 +5,7 @@ const func = require('od-utility');
 
 const VNSalaryAction = require('../../actions/salary.action');
 
-router.post('/detail/:realm_token/:driver_token', async (req, res, next) => {
+router.post('/detail/:driver_token', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNSalaryAction.registerSalary(

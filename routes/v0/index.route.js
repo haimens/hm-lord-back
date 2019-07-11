@@ -19,7 +19,8 @@ router.use(
         token_type_zero: [],
         token_type_one: [],
         token_type_two: [],
-        token_type_three: ['quote', 'driver', 'customer', 'car', 'trip', 'order', 'address', 'alert', 'realm']
+        token_type_three: ['quote', 'driver', 'customer', 'car', 'trip', 'order',
+            'address', 'alert', 'realm', 'wage', 'salary']
     })
 );
 
@@ -54,6 +55,9 @@ const tripRoute = require('./trip.route');
 const alertRoute = require('./alert.route');
 const realmRoute = require('./realm.route');
 
+const wageRoute = require('./wage.route');
+const salaryRoute = require('./salary.route');
+
 
 router.use('/quote', quoteRoute);
 router.use('/driver', driverRoute);
@@ -63,10 +67,14 @@ router.use('/address', addressRoute);
 router.use('/trip', tripRoute);
 router.use('/alert', alertRoute);
 router.use('/realm', realmRoute);
+router.use('/wage', wageRoute);
+router.use('/salary', salaryRoute);
+
+
 // App routes
 
 router.use('/', async (req, res, next) => {
-    res.json({status: false, message: 'KING V0 INDEX REACHED'});
+    res.json({status: false, message: 'LORD V0 INDEX REACHED'});
 });
 
 module.exports = router;

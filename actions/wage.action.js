@@ -9,14 +9,23 @@ class VNWageAction extends VNAction {
     static async registerWage(params, body, query, auth) {
         try {
             const {realm_token} = this.checkRealmToken(auth);
-
             const {driver_token} = params;
+
+
             if (!driver_token) func.throwErrorWithMissingParam('driver_token');
+
+            const {amount, other_info} = body;
+            const {coin_token} = await coreConn.coreRequest(
+                'POST',
+                ['coin', 'detail'],
+                query, {}, {amount}
+            );
+
 
             return await coreConn.coreRequest(
                 'POST',
                 ['wage', 'detail', realm_token, driver_token],
-                {}, {}, body
+                {}, {}, {amount, ...other_info}
             );
         } catch (e) {
             throw e;
@@ -37,7 +46,7 @@ class VNWageAction extends VNAction {
         }
     }
 
-    static async findWageList(params, body, query, auth) {
+    static async findWageListWithDriver(params, body, query, auth) {
         try {
             const {realm_token} = this.checkRealmToken(auth);
 
@@ -54,7 +63,7 @@ class VNWageAction extends VNAction {
         }
     }
 
-    static async findWageSum(params, body, query, auth) {
+    static async findWageSumWithDriver(params, body, query, auth) {
         try {
             const {realm_token} = this.checkRealmToken(auth);
 
