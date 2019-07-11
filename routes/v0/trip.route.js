@@ -34,7 +34,6 @@ router.get('/all/active/realm', async (req, res, next) => {
 });
 
 
-
 router.get('/detail/:trip_token', async (req, res, next) => {
     try {
 
@@ -149,6 +148,20 @@ router.post('/alerts/:trip_token', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNTripAction.registerTripAlerts(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
+
+router.get('/count/realm/:realm_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNTripAction.findTripCountInRealm(
                 req.params, req.body, req.query, req.lord.verify_info
             )
         );
