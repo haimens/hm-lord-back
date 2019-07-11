@@ -13,10 +13,18 @@ class VNSalaryAction extends VNAction {
             const {driver_token} = params;
             if (!driver_token) func.throwErrorWithMissingParam('driver_token');
 
+            const {amount, ...other_info} = body;
+            const {coin_token} = await coreConn.coreRequest(
+                'POST',
+                ['coin', 'detail'],
+                query, {}, {amount}
+            );
+
+
             return await coreConn.coreRequest(
                 'POST',
                 ['salary', 'detail', realm_token, driver_token],
-                {}, {}, body
+                {}, {}, {coin_token, ...other_info}
             );
         } catch (e) {
             throw e;
@@ -40,7 +48,6 @@ class VNSalaryAction extends VNAction {
             throw e;
         }
     }
-
 
 
     static async findSalarySumWithDriver(params, body, query, auth) {

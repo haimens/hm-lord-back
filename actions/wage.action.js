@@ -14,7 +14,7 @@ class VNWageAction extends VNAction {
 
             if (!driver_token) func.throwErrorWithMissingParam('driver_token');
 
-            const {amount, other_info} = body;
+            const {amount, ...other_info} = body;
             const {coin_token} = await coreConn.coreRequest(
                 'POST',
                 ['coin', 'detail'],
@@ -25,7 +25,7 @@ class VNWageAction extends VNAction {
             return await coreConn.coreRequest(
                 'POST',
                 ['wage', 'detail', realm_token, driver_token],
-                {}, {}, {amount, ...other_info}
+                {}, {}, {coin_token, ...other_info}
             );
         } catch (e) {
             throw e;
