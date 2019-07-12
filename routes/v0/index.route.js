@@ -19,8 +19,10 @@ router.use(
         token_type_zero: [],
         token_type_one: [],
         token_type_two: [],
-        token_type_three: ['quote', 'driver', 'customer', 'car', 'trip', 'order',
-            'address', 'alert', 'realm', 'wage', 'salary', 'note', 'order']
+        token_type_three: [
+            'quote', 'driver', 'customer', 'car', 'trip', 'order',
+            'address', 'alert', 'realm', 'wage', 'salary', 'note', 'order'
+        ]
     })
 );
 

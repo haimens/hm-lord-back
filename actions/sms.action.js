@@ -1,8 +1,9 @@
 const func = require('od-utility');
 const coreConn = require('../services/core.conn');
+const VNAction = require('./action.model');
 
 
-class VNSMSAction {
+class VNSMSAction extends VNAction {
 
 
     static async findCustomerSMSList(params, body, query, auth) {
@@ -11,7 +12,7 @@ class VNSMSAction {
             const {realm_token} = auth;
             if (!customer_token) func.throwErrorWithMissingParam('customer_token');
             if (!realm_token) func.throwErrorWithMissingParam('realm_token');
-            return coreConn.coreRequest(
+            return await coreConn.coreRequest(
                 'GET',
                 ['message', 'all', 'detail', 'customer', realm_token, customer_token],
                 query, {}, {}
@@ -28,7 +29,7 @@ class VNSMSAction {
             const {realm_token} = auth;
 
             if (!customer_token) func.throwErrorWithMissingParam('customer_token');
-            return coreConn.coreRequest(
+            return await coreConn.coreRequest(
                 'POST',
                 ['message', 'send', 'customer', realm_token, customer_token],
                 {}, {...body, type: 1}
@@ -40,8 +41,15 @@ class VNSMSAction {
 
     static async modifySMSDetail(params, body, query, auth) {
         try {
-            const {} = params;
-            const {realm_token} = auth;
+            const {sms_token} = params;
+            const {realm_token} = this.checkRealmToken(auth);
+
+
+            return await coreConn.coreRequest(
+                'PATCH',
+                ['sms', 'detail', realm_token, sms_token],
+                {}, {}, body
+            );
         } catch (e) {
             throw e;
         }
