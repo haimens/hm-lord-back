@@ -20,7 +20,7 @@ router.use(
         token_type_one: [],
         token_type_two: [],
         token_type_three: ['quote', 'driver', 'customer', 'car', 'trip', 'order',
-            'address', 'alert', 'realm', 'wage', 'salary', 'note']
+            'address', 'alert', 'realm', 'wage', 'salary', 'note', 'order']
     })
 );
 
@@ -59,6 +59,7 @@ const wageRoute = require('./wage.route');
 const salaryRoute = require('./salary.route');
 
 const noteRoute = require('./note.route');
+const orderRoute = require('./order.route');
 
 
 router.use('/quote', quoteRoute);
@@ -72,6 +73,7 @@ router.use('/realm', realmRoute);
 router.use('/wage', wageRoute);
 router.use('/salary', salaryRoute);
 router.use('/note', noteRoute);
+router.use('/order', orderRoute);
 
 
 // App routes

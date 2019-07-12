@@ -52,7 +52,8 @@ class VNRealmAction extends VNAction {
 
     static async modifyEmailResource(params, body, query, auth) {
         try {
-            const {realm_token, email_resource_token} = params;
+            const {email_resource_token} = params;
+            const {realm_token} = this.checkRealmToken(auth);
             return await coreConn.coreRequest(
                 'PATCH',
                 ['realm', 'email', realm_token, email_resource_token],
@@ -66,7 +67,9 @@ class VNRealmAction extends VNAction {
 
     static async modifyMessageResource(params, body, query, auth) {
         try {
-            const {realm_token, message_resource_token} = params;
+            const {message_resource_token} = params;
+
+            const {realm_token} = this.checkRealmToken(auth);
             return await coreConn.coreRequest(
                 'PATCH',
                 ['realm', 'message', realm_token, message_resource_token],
@@ -79,7 +82,8 @@ class VNRealmAction extends VNAction {
 
     static async modifyPaymentResource(params, body, query, auth) {
         try {
-            const {realm_token, payment_resource_token} = params;
+            const {payment_resource_token} = params;
+            const {realm_token} = this.checkRealmToken(auth);
             return await coreConn.coreRequest(
                 'PATCH',
                 ['realm', 'payment', realm_token, payment_resource_token],

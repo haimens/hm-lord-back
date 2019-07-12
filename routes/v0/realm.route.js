@@ -6,12 +6,11 @@ const func = require('od-utility');
 const VNRealmAction = require('../../actions/realm.action');
 
 
-
 router.get('/detail', async (req, res, next) => {
 
     try {
         const resBody = func.configSuccess(
-            await VNRealmAction.findRealmDetail(req.params, req.body, req.query)
+            await VNRealmAction.findRealmDetail(req.params, req.body, req.query, req.lord.verify_info)
         );
 
         res.json(resBody);
@@ -29,7 +28,7 @@ router.post('/message', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNRealmAction.registerMessageResource(
-                req.params, req.body, req.query
+                req.params, req.body, req.query, req.lord.verify_info
             )
         );
 
@@ -48,7 +47,7 @@ router.post('/email', async (req, res, next) => {
 
         const resBody = func.configSuccess(
             await VNRealmAction.registerEmailResource(
-                req.params, req.body, req.query
+                req.params, req.body, req.query, req.lord.verify_info
             )
         );
 
@@ -64,7 +63,7 @@ router.post('/payment', async (req, res, next) => {
 
         const resBody = func.configSuccess(
             await VNRealmAction.registerPaymentResource(
-                req.params, req.body, req.query
+                req.params, req.body, req.query, req.lord.verify_info
             )
         );
 
@@ -79,7 +78,7 @@ router.post('/payment', async (req, res, next) => {
 router.patch('/detail', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
-            await VNRealmAction.modifyRealmDetail(req.params, req.body, req.query),
+            await VNRealmAction.modifyRealmDetail(req.params, req.body, req.query, req.lord.verify_info),
             'REALM BASIC INFO UPDATED'
         );
 
@@ -94,7 +93,7 @@ router.patch('/resource', async (req, res, next) => {
 
     try {
         const resBody = func.configSuccess(
-            await VNRealmAction.modifyRealmResource(req.params, req.body, req.query),
+            await VNRealmAction.modifyRealmResource(req.params, req.body, req.query, req.lord.verify_info),
             'REALM PRIMARY RESOURCE INFO UPDATED'
         );
         res.json(resBody);
@@ -109,7 +108,7 @@ router.patch('/email/:email_resource_token', async (req, res, next) => {
     try {
 
         const resBody = func.configSuccess(
-            await VNRealmAction.modifyEmailResource(req.params, req.body, req.query),
+            await VNRealmAction.modifyEmailResource(req.params, req.body, req.query, req.lord.verify_info),
             'REALM EMAIL RESOURCE INFO UPDATED'
         );
 
@@ -123,7 +122,7 @@ router.patch('/email/:email_resource_token', async (req, res, next) => {
 router.patch('/message/:message_resource_token', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
-            await VNRealmAction.modifyMessageResource(req.params, req.body, req.query),
+            await VNRealmAction.modifyMessageResource(req.params, req.body, req.query, req.lord.verify_info),
             'REALM MESSAGE RESOURCE INFO UPDATED'
         );
 
@@ -137,7 +136,7 @@ router.patch('/message/:message_resource_token', async (req, res, next) => {
 router.patch('/payment/:payment_resource_token', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
-            await VNRealmAction.modifyPaymentResource(req.params, req.body, req.query),
+            await VNRealmAction.modifyPaymentResource(req.params, req.body, req.query, req.lord.verify_info),
             'REALM PAYMENT RESOURCE INFO UPDATED'
         );
 
@@ -154,7 +153,7 @@ router.get('/all/email', async (req, res, next) => {
 
     try {
         const resBody = func.configSuccess(
-            await VNRealmAction.findEmailResourceList(req.params, req.body, req.query)
+            await VNRealmAction.findEmailResourceList(req.params, req.body, req.query, req.lord.verify_info)
         );
 
         res.json(resBody);
@@ -169,7 +168,7 @@ router.get('/all/message', async (req, res, next) => {
 
     try {
         const resBody = func.configSuccess(
-            await VNRealmAction.findMessageResourceList(req.params, req.body, req.query)
+            await VNRealmAction.findMessageResourceList(req.params, req.body, req.query, req.lord.verify_info)
         );
 
         res.json(resBody);
@@ -186,7 +185,7 @@ router.get('/all/payment', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNRealmAction.findPaymentResourceList(
-                req.params, req.body, req.query
+                req.params, req.body, req.query, req.lord.verify_info
             )
         );
 
