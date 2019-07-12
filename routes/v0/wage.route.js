@@ -76,4 +76,19 @@ router.get('/sum/realm', async (req, res, next) => {
     }
 });
 
+router.patch('/detail/:driver_token/:wage_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNWageAction.modifyWageDetail(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+
+});
+
 module.exports = router;

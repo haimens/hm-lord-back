@@ -4,7 +4,7 @@ const func = require('od-utility');
 
 const VNAlertAction = require('../../actions/alert.action');
 
-router.patch('/detail/:realm_token/:alert_token', async (req, res, next) => {
+router.patch('/detail/:alert_token', async (req, res, next) => {
     try {
 
         const resBody = func.configSuccess(
@@ -14,7 +14,7 @@ router.patch('/detail/:realm_token/:alert_token', async (req, res, next) => {
         );
         res.json(resBody);
     } catch (e) {
-        throw e;
+        next(e);
     }
 });
 
