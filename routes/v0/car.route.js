@@ -114,4 +114,53 @@ router.get('/detail/:car_token', async (req, res, next) => {
     }
 });
 
+
+router.post('/type', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNCarAction.registerCarType(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
+router.get('/all/type', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNCarAction.findAllCarType(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+
+
+    } catch (e) {
+        next(e);
+    }
+
+});
+
+
+router.patch('/type/:car_type_token', async (req, res, next) => {
+
+    try {
+
+        const resBody = func.configSuccess(
+            await VNCarAction.modifyCarType(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
 module.exports = router;

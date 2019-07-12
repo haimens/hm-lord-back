@@ -17,7 +17,6 @@ class VNCarAction extends VNAction {
         } catch (e) {
             throw e;
         }
-
     }
 
     static async findCarList(params, body, query, auth) {
@@ -114,6 +113,50 @@ class VNCarAction extends VNAction {
                 'GET',
                 ['car', 'detail', realm_token, car_token],
                 {}, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+
+    static async registerCarType(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'POST',
+                ['car', 'type', realm_token],
+                {}, {}, body
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async findAllCarType(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['car', 'all', 'type', realm_token],
+                {}, {}, body
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async modifyCarType(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+            const {car_type_token} = params;
+
+            return await coreConn.coreRequest(
+                'PATCH',
+                ['type', realm_token, car_type_token],
+                {}, {}, body
             );
         } catch (e) {
             throw e;
