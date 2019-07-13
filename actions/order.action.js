@@ -98,6 +98,23 @@ class VNOrderAction extends VNAction {
         }
     }
 
+    static async modifyOrderToFinalize(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            const {order_token} = params;
+
+            return await coreConn.coreRequest(
+                'PATCH',
+                ['order', 'finalize', realm_token, order_token],
+                {}, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+
 }
 
 module.exports = VNOrderAction;

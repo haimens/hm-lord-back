@@ -41,6 +41,22 @@ router.post('/detail', async (req, res, next) => {
             )
         );
         res.json(resBody);
+
+    } catch (e) {
+        next(e);
+    }
+});
+
+router.post('/discount/:order_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNOrderAction.registerOrderDiscount(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+
     } catch (e) {
         next(e);
     }
@@ -75,5 +91,20 @@ router.patch('/discount/:order_token/:order_discount_token', async (req, res, ne
         next(e);
     }
 });
+
+router.patch('/finalize/:order_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNOrderAction.modifyOrderToFinalize(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
 
 module.exports = router;
