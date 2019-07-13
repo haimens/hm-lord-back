@@ -155,7 +155,7 @@ class VNCarAction extends VNAction {
 
             return await coreConn.coreRequest(
                 'PATCH',
-                ['type', realm_token, car_type_token],
+                ['car', 'type', realm_token, car_type_token],
                 {}, {}, body
             );
         } catch (e) {

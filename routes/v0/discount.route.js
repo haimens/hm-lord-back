@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const func = require('od-utility');
 
+const VNDiscountAction = require('../../actions/discount.action');
+
 
 router.get('/all/detail/realm', async (req, res, next) => {
     try {
