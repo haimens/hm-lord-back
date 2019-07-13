@@ -115,7 +115,7 @@ router.get('/all/active/driver/:driver_token', async (req, res, next) => {
 });
 
 
-router.post('/addon/:trip_token', async (req, res, next) => {
+router.post('/addon/:order_token/:trip_token', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNTripAction.registerTripAddon(
