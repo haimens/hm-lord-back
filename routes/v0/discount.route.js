@@ -3,7 +3,7 @@ const router = express.Router();
 const func = require('od-utility');
 
 
-router.get('/all/detail/realm/:realm_token', async (req, res, next) => {
+router.get('/all/detail/realm', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNDiscountAction.findDiscountListInRealm(
@@ -16,7 +16,7 @@ router.get('/all/detail/realm/:realm_token', async (req, res, next) => {
 });
 
 
-router.post('/detail/:realm_token', async (req, res, next) => {
+router.post('/detail', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNDiscountAction.registerDiscountDetail(
@@ -28,7 +28,7 @@ router.post('/detail/:realm_token', async (req, res, next) => {
     }
 });
 
-router.patch('/detail/:realm_token/:discount_token', async (req, res, next) => {
+router.patch('/detail/:discount_token', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNDiscountAction.modifyDiscountDetail(
