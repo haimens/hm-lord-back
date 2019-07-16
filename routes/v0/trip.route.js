@@ -158,7 +158,7 @@ router.post('/alerts/:trip_token', async (req, res, next) => {
 });
 
 
-router.get('/count/realm/:realm_token', async (req, res, next) => {
+router.get('/count/realm', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNTripAction.findTripCountInRealm(

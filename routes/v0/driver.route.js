@@ -125,4 +125,34 @@ router.get('/detail/:driver_token', async (req, res, next) => {
         next(e);
     }
 });
+
+router.patch('/share/:driver_token', async (req, res, next) => {
+    try {
+
+        const resBody = func.configSuccess(
+            await VNDriverAction.sendDriverSharingRequest(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
+
+router.get('/all/payable/realm', async (req, res, next) => {
+    try {
+
+        const resBody = func.configSuccess(
+            await VNDriverAction.findAllDriverPayableInfo(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
 module.exports = router;

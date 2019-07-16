@@ -107,7 +107,7 @@ class VNDriverAction extends VNAction {
             return await coreConn.coreRequest(
                 'PATCH',
                 ['driver', 'car', realm_token, driver_car_token],
-                {}, {},body
+                {}, {}, body
             );
         } catch (e) {
             throw e;
@@ -126,6 +126,40 @@ class VNDriverAction extends VNAction {
                 ['driver', 'detail', realm_token, driver_token],
                 {}, {}, {}
             );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async sendDriverSharingRequest(params, body, query, auth) {
+        try {
+            const {driver_token} = params;
+
+            if (!driver_token) func.throwErrorWithMissingParam('driver_token');
+
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'PATCH',
+                ['driver', 'share', realm_token, driver_token],
+                {}, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    static async findAllDriverPayableInfo(params, body, query, auth) {
+        try {
+
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['driver', 'all', 'payable', 'realm', realm_token],
+                query, {}, {}
+            );
+
         } catch (e) {
             throw e;
         }
