@@ -9,18 +9,31 @@ class VNSMSAction extends VNAction {
     static async findCustomerSMSList(params, body, query, auth) {
         try {
             const {customer_token} = params;
-            const {realm_token} = auth;
             if (!customer_token) func.throwErrorWithMissingParam('customer_token');
-            if (!realm_token) func.throwErrorWithMissingParam('realm_token');
+
             return await coreConn.coreRequest(
                 'GET',
-                ['message', 'all', 'detail', 'customer', realm_token, customer_token],
+                ['message', 'all', 'detail', 'customer', customer_token],
                 query, {}, {}
             );
         } catch (e) {
             throw e;
         }
 
+    }
+
+    static async findSMSListInRealm(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['message', 'all', 'detail', 'realm', realm_token],
+                query, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
     }
 
     static async sendSMSWithCustomer(params, body, query, auth) {

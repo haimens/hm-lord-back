@@ -22,6 +22,20 @@ class VNAlertAction extends VNAction {
         }
     }
 
+    static async findAlertListInRealm(params, body, query, auth) {
+        try {
+            const {realm_token} = this.checkRealmToken(auth);
+
+            return await coreConn.coreRequest(
+                'GET',
+                ['alert', 'all', 'detail', 'realm',realm_token],
+                query, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
 }
 
 module.exports = VNAlertAction;

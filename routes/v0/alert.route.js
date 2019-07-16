@@ -19,4 +19,19 @@ router.patch('/detail/:alert_token', async (req, res, next) => {
 });
 
 
+router.get('/all/detail/realm', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNAlertAction.findAlertListInRealm(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
+
 module.exports = router;
