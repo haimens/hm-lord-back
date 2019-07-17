@@ -17,6 +17,20 @@ router.get('/all/detail/realm', async (req, res, next) => {
     }
 });
 
+router.get('/all/detail/customer/:customer_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNOrderAction.findOrderListWithCustomer(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
 router.get('/detail/:order_token', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(

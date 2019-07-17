@@ -32,7 +32,7 @@ class VNPaymentAction extends VNAction {
 
             const {amount} = basic_info;
 
-            const response = await VNPaymentFunc.chargeWithCardNonce(amount, card_nonce, order_token, payment_resource_info)
+            const response = await VNPaymentFunc.chargeWithCardNonce(amount, card_nonce, order_token, payment_resource_info);
             const {id: square_transaction_id} = response.transaction;
 
             await coreConn.coreRequest(
