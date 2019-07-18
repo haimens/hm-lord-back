@@ -8,7 +8,7 @@ router.post('/web/:order_token', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(
             await VNPaymentAction.makePaymentForOrder(
-                req.params, req.body, req.query, req.lord.auth
+                req.params, req.body, req.query, req.lord.verify_info
             )
         );
 

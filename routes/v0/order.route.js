@@ -121,4 +121,19 @@ router.patch('/finalize/:order_token', async (req, res, next) => {
 });
 
 
+router.patch('/cancel/:order_token', async (req, res, next) => {
+    try {
+        const resBody = func.configSuccess(
+            await VNOrderAction.modifyOrderToCancel(
+                req.params, req.body, req.query, req.lord.verify_info
+            )
+        );
+
+        res.json(resBody);
+    } catch (e) {
+        next(e);
+    }
+});
+
+
 module.exports = router;

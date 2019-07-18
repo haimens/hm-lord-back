@@ -27,7 +27,7 @@ class VNOrderAction extends VNAction {
 
             return await coreConn.coreRequest(
                 'GET',
-                ['order', 'all', 'detail', 'customer', realm_token,customer_token],
+                ['order', 'all', 'detail', 'customer', realm_token, customer_token],
                 query, {}, {}
             );
         } catch (e) {
@@ -115,14 +115,31 @@ class VNOrderAction extends VNAction {
 
     static async modifyOrderToFinalize(params, body, query, auth) {
         try {
-            const {realm_token} = this.checkRealmToken(auth);
+            const {realm_token, lord_token} = this.checkRealmToken(auth);
 
             const {order_token} = params;
 
             return await coreConn.coreRequest(
                 'PATCH',
                 ['order', 'finalize', realm_token, order_token],
-                {}, {}, {}
+                {lord_token}, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
+
+    static async modifyOrderToCancel(params, body, query, auth) {
+        try {
+            const {realm_token, lord_token} = this.checkRealmToken(auth);
+
+            const {order_token} = params;
+
+            return await coreConn.coreRequest(
+                'PATCH',
+                ['order', 'cancel', realm_token, order_token],
+                {lord_token}, {}, {}
             );
         } catch (e) {
             throw e;

@@ -23,7 +23,7 @@ router.use(
             'quote', 'driver', 'customer', 'car', 'trip', 'order',
             'address', 'alert', 'realm', 'wage', 'salary',
             'note', 'order', 'flight'
-            , 'discount', 'message'
+            , 'discount', 'message', 'payment'
         ]
     })
 );
@@ -71,6 +71,8 @@ const discountRoute = require('./discount.route');
 
 const smsRoute = require('./sms.route');
 
+const paymentRoute = require('./payment.route');
+
 
 router.use('/quote', quoteRoute);
 router.use('/driver', driverRoute);
@@ -87,6 +89,7 @@ router.use('/order', orderRoute);
 router.use('/flight', flightRoute);
 router.use('/discount', discountRoute);
 router.use('/message', smsRoute);
+router.use('/payment', paymentRoute)
 
 
 // App routes
