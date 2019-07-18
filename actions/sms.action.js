@@ -39,13 +39,13 @@ class VNSMSAction extends VNAction {
     static async sendSMSWithCustomer(params, body, query, auth) {
         try {
             const {customer_token} = params;
-            const {realm_token} = auth;
+            const {realm_token, lord_token} = auth;
 
             if (!customer_token) func.throwErrorWithMissingParam('customer_token');
             return await coreConn.coreRequest(
                 'POST',
                 ['message', 'send', 'customer', realm_token, customer_token],
-                {}, {...body, type: 1}
+                {lord_token}, {}, {...body, type: 1}
             );
         } catch (e) {
             throw e;
@@ -60,7 +60,7 @@ class VNSMSAction extends VNAction {
 
             return await coreConn.coreRequest(
                 'PATCH',
-                ['sms', 'detail', realm_token, sms_token],
+                ['message', 'detail', realm_token, sms_token],
                 {}, {}, body
             );
         } catch (e) {
