@@ -45,7 +45,7 @@ class VNSettingAction extends VNAction {
             return await coreConn.coreRequest(
                 'PATCH',
                 ['setting', 'detail', realm_token, setting_token],
-                {}, {}, {}
+                {}, {}, body
             )
         } catch (e) {
             throw e;
