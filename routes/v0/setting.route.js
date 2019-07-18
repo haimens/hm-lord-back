@@ -3,6 +3,7 @@ const router = express.Router();
 
 const func = require('od-utility');
 
+const VNSettingAction = require('../../actions/setting.action');
 router.post('/detail', async (req, res, next) => {
     try {
         const resBody = func.configSuccess(

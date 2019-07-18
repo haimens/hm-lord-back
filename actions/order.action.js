@@ -146,6 +146,22 @@ class VNOrderAction extends VNAction {
         }
     }
 
+    static async modifyOrderToConfirm(params, body, query, auth) {
+        try {
+            const {realm_token, lord_token} = this.checkRealmToken(auth);
+
+            const {order_token} = params;
+
+            return await coreConn.coreRequest(
+                'PATCH',
+                ['order', 'confirm', realm_token, order_token],
+                {lord_token}, {}, {}
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
+
 
 }
 
