@@ -40,7 +40,8 @@ class VNDriverAction extends VNAction {
 
             return await coreConn.coreRequest(
                 'GET',
-                ['driver', 'all', 'location', 'realm', realm_token]
+                ['driver', 'all', 'location', 'realm', realm_token],
+                query,{},{}
             )
         } catch (e) {
             throw e;
