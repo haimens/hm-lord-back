@@ -18,6 +18,22 @@ class VNEmailAction extends VNAction {
             throw e;
         }
     }
+
+    static async sendEmailWithDriver(params, body, query, auth) {
+        try {
+            const {customer_token} = params;
+            const {realm_token, lord_token} = auth;
+
+            if (!customer_token) func.throwErrorWithMissingParam('customer_token');
+            return await coreConn.coreRequest(
+                'POST',
+                ['email', 'send', 'driver', realm_token, customer_token],
+                {lord_token}, {}, body
+            );
+        } catch (e) {
+            throw e;
+        }
+    }
 }
 
 module.exports = VNEmailAction;
