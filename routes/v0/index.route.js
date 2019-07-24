@@ -76,6 +76,9 @@ const settingRoute = require('./setting.route');
 
 const emailRoute = require('./email.route');
 
+const invoiceRoute = require('./invoice.route');
+const tributeRoute = require('./tribute.route');
+
 
 router.use('/quote', quoteRoute);
 router.use('/driver', driverRoute);
@@ -95,6 +98,9 @@ router.use('/message', smsRoute);
 router.use('/payment', paymentRoute);
 router.use('/setting', settingRoute);
 router.use('/email', emailRoute);
+
+router.use('/invoice', invoiceRoute);
+router.use('/tribute', tributeRoute);
 
 
 // App routes
