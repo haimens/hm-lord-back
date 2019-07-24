@@ -23,7 +23,8 @@ router.use(
             'quote', 'driver', 'customer', 'car', 'trip', 'order',
             'address', 'alert', 'realm', 'wage', 'salary',
             'note', 'order', 'flight', 'setting'
-            , 'discount', 'message', 'payment', 'email'
+            , 'discount', 'message', 'payment', 'email',
+            'invoice', 'tribute'
         ]
     })
 );
