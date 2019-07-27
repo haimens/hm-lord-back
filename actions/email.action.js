@@ -21,13 +21,13 @@ class VNEmailAction extends VNAction {
 
     static async sendEmailWithDriver(params, body, query, auth) {
         try {
-            const {customer_token} = params;
+            const {driver_token} = params;
             const {realm_token, lord_token} = auth;
 
-            if (!customer_token) func.throwErrorWithMissingParam('customer_token');
+            if (!driver_token) func.throwErrorWithMissingParam('driver_token');
             return await coreConn.coreRequest(
                 'POST',
-                ['email', 'send', 'driver', realm_token, customer_token],
+                ['email', 'send', 'driver', realm_token, driver_token],
                 {lord_token}, {}, body
             );
         } catch (e) {
